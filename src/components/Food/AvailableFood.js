@@ -1,7 +1,8 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import FoodItem from './FoodItem/FoodItem';
 import classes from './AvailableFood.module.css';
 import Card from './../UI/Card';
+import AddFoodManually from './AddFoodManually';
 
 const item1UseByDate = new Date(2023, 11);
 const monthAndYear1 = `${item1UseByDate.getMonth()}/${item1UseByDate.getFullYear()}`;
@@ -32,6 +33,11 @@ const DUMMY_FOOD = [
 ];
 
 const AvailableFood = () => {
+  const [addFood, setAddFood] = useState(false);
+
+  const openAddFoodForm = () => {
+    setAddFood(true);
+  };
   const foodList = DUMMY_FOOD.map((food) => (
     <FoodItem
       id={food.id}
@@ -44,7 +50,10 @@ const AvailableFood = () => {
   return (
     <Fragment>
       <section className={classes.meals}>
-        <button className={classes.button}>Add a Product Manually</button>
+        <button className={classes.button} onClick={openAddFoodForm}>
+          Add a Product Manually
+        </button>
+        {addFood && <AddFoodManually />}
         <Card>
           <ul>{foodList}</ul>
         </Card>
