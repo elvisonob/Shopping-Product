@@ -1,8 +1,9 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useContext } from 'react';
 import FoodItem from './FoodItem/FoodItem';
 import classes from './AvailableFood.module.css';
 import Card from './../UI/Card';
 import AddFoodManually from './AddFoodManually';
+import ItemContext from '../../store/item-context';
 
 // const item1UseByDate = new Date(2023, 11);
 // const monthAndYear1 = `${item1UseByDate.getMonth()}/${item1UseByDate.getFullYear()}`;
@@ -32,8 +33,18 @@ const DUMMY_FOOD = [
   },
 ];
 
-const AvailableFood = () => {
+const AvailableFood = (props) => {
+  const itemCtx = useContext(ItemContext);
   const [addFood, setAddFood] = useState(false);
+
+  const addItemManuallyHandler = (name, expiryDate, amount) => {
+    itemCtx.addItem({
+      id: props.id,
+      name: name,
+      amount: amount,
+      expiryDate: expiryDate,
+    });
+  };
 
   const openAddFoodForm = () => {
     setAddFood(true);
@@ -53,7 +64,7 @@ const AvailableFood = () => {
         <button className={classes.button} onClick={openAddFoodForm}>
           Add a Product Manually
         </button>
-        {addFood && <AddFoodManually />}
+        {addFood && <AddFoodManually onAddFoodName={addItemManuallyHandler} />}
         <Card>
           <ul>{foodList}</ul>
         </Card>

@@ -1,14 +1,26 @@
+import { useContext } from 'react';
 import Modal from '../UI/Modal';
+import AddedItem from './AddedItem';
 import classes from './AddedItemCart.module.css';
+import ItemContext from '../../store/item-context';
 
 const AddedItemCart = (props) => {
+  const itemCtx = useContext(ItemContext);
+
+  const addedItemRemoveHandler = (id) => {};
+  const addedItemAddHandler = (item) => {};
   const cartItems = (
     <ul className={classes['cart-items']}>
-      {[{ id: 'c1', name: 'Sushi', amount: '2', expiryDate: 'Dec 2023' }].map(
-        (item) => (
-          <li>{item.name}</li>
-        )
-      )}
+      {itemCtx.items.map((item) => (
+        <AddedItem
+          key={item.id}
+          name={item.name}
+          amount={item.amount}
+          expiryDate={item.expiryDate}
+          onRemove={addedItemRemoveHandler.bind(null, item.id)}
+          onAdd={addedItemAddHandler.bind(null, item)}
+        />
+      ))}
     </ul>
   );
   return (

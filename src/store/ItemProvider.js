@@ -8,8 +8,24 @@ const defaultItemAddedState = {
 
 const addedItemReducer = (state, action) => {
   if (action.type === 'ADD') {
-    const updatedItems = state.items.concat(action.item);
     const updatedTotalAmount = state.totalAmount + action.item.amount;
+
+    const existingAddedItemIndex = state.items.findIndex(
+      (item) => item.id === action.item.id
+    );
+    const existingAddedItem = state.items[existingAddedItemIndex];
+    let updatedItems;
+    if (existingAddedItem) {
+      const updatedItem = {
+        ...existingAddedItem,
+        amount: existingAddedItem.amount + action.item.amount,
+      };
+      updatedItems = [...state.items];
+      updatedItems[existingAddedItemIndex] = updatedItem;
+    } else {
+      updatedItems = state.items.concat(action.item);
+    }
+
     return {
       items: updatedItems,
       totalAmount: updatedTotalAmount,

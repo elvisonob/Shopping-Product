@@ -13,6 +13,7 @@ const FoodItem = (props) => {
       expiryDate: props.expiryDate,
     });
   };
+
   return (
     <li className={classes.meal}>
       <div>
