@@ -1,30 +1,30 @@
 import React, { useState } from 'react';
 
 const AddFoodManually = (props) => {
-  const [addFoodName, setAddFoodName] = useState('');
-  const [addDate, setAddDate] = useState('');
-  const [addNumber, setAddNumber] = useState('');
+  const [enteredFoodName, setEnteredFoodName] = useState('');
+  const [enteredDate, setEnteredDate] = useState('');
+  const [enteredNumber, setEnteredNumber] = useState('');
 
   const addFoodHandler = (e) => {
-    setAddFoodName(e.target.value);
+    setEnteredFoodName(e.target.value);
   };
 
   const addDateHandler = (e) => {
-    setAddDate(e.target.value);
+    setEnteredDate(e.target.value);
   };
 
   const onAddNumberHandler = (e) => {
-    setAddNumber(e.target.value);
+    setEnteredNumber(e.target.value);
   };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    console.log(addFoodName, addDate);
-    const enteredNumber = addNumber;
+
+    console.log(enteredFoodName, enteredDate);
     const enteredAmountNumber = +enteredNumber;
-    props.onAddFoodName(addFoodName, addDate, enteredAmountNumber);
-    setAddFoodName('');
-    setAddDate('');
+    props.onAddFoodName(enteredFoodName, enteredDate, enteredAmountNumber);
+    setEnteredFoodName('');
+    setEnteredDate('');
   };
   return (
     <form onSubmit={onSubmitHandler}>
@@ -35,7 +35,7 @@ const AddFoodManually = (props) => {
             type="text"
             id="name"
             onChange={addFoodHandler}
-            value={addFoodName}
+            value={enteredFoodName}
           />
         </div>
         <div className="form-control">
@@ -43,7 +43,7 @@ const AddFoodManually = (props) => {
           <input
             type="text"
             id="name"
-            value={addDate}
+            value={enteredDate}
             onChange={addDateHandler}
           />
           <div>
@@ -51,7 +51,7 @@ const AddFoodManually = (props) => {
             <input
               type="number"
               id="number"
-              value={addNumber}
+              value={enteredNumber}
               onChange={onAddNumberHandler}
             />
           </div>

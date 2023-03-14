@@ -7,8 +7,12 @@ import ItemContext from '../../store/item-context';
 const AddedItemCart = (props) => {
   const itemCtx = useContext(ItemContext);
 
-  const addedItemRemoveHandler = (id) => {};
-  const addedItemAddHandler = (item) => {};
+  const addedItemRemoveHandler = (id) => {
+    itemCtx.removeItem(id);
+  };
+  const addedItemAddHandler = (item) => {
+    itemCtx.addItem({ ...item, amount: 1 });
+  };
   const cartItems = (
     <ul className={classes['cart-items']}>
       {itemCtx.items.map((item) => (

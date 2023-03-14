@@ -31,6 +31,25 @@ const addedItemReducer = (state, action) => {
       totalAmount: updatedTotalAmount,
     };
   }
+
+  if (action.type === 'REMOVE') {
+    const existingAddedItemIndex = state.items.findIndex(
+      (item) => item.id === action.id
+    );
+    const existingItem = state.items[existingAddedItemIndex];
+
+    let updatedItems;
+    if (existingItem.amount === 1) {
+      updatedItems = state.items.filter((item) => item.id !== action.id);
+    } else {
+      const updatedItem = { ...existingItem, amount: existingItem.amount - 1 };
+      updatedItems = [...state.items];
+      updatedItems[existingAddedItemIndex] = updatedItem;
+    }
+    return {
+      items: updatedItems,
+    };
+  }
   return defaultItemAddedState;
 };
 

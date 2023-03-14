@@ -64,7 +64,12 @@ const AvailableFood = (props) => {
         <button className={classes.button} onClick={openAddFoodForm}>
           Add a Product Manually
         </button>
-        {addFood && <AddFoodManually onAddFoodName={addItemManuallyHandler} />}
+        {addFood && (
+          <AddFoodManually
+            id={props.id}
+            onAddFoodName={addItemManuallyHandler}
+          />
+        )}
         <Card>
           <ul>{foodList}</ul>
         </Card>
