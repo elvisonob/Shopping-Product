@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import Modal from '../UI/Modal';
 import AddedItem from './AddedItem';
 import classes from './AddedItemCart.module.css';
@@ -13,6 +13,7 @@ const AddedItemCart = (props) => {
   const addedItemAddHandler = (item) => {
     itemCtx.addItem({ ...item, amount: 1 });
   };
+
   const cartItems = (
     <ul className={classes['cart-items']}>
       {itemCtx.items.map((item) => (
@@ -27,6 +28,7 @@ const AddedItemCart = (props) => {
       ))}
     </ul>
   );
+
   return (
     <Modal onClose={props.onClose}>
       {cartItems}
