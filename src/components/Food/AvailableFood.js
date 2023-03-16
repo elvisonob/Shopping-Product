@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useContext } from 'react';
+import React, { Fragment, useState } from 'react';
 import FoodItem from './FoodItem/FoodItem';
 import classes from './AvailableFood.module.css';
 import Card from './../UI/Card';
@@ -20,6 +20,23 @@ const DUMMY_FOOD = [
     id: 'm3',
     name: 'Barbecue Burger',
     expiryDate: new Date(2025, 8, 7).getFullYear(),
+  },
+  {
+    id: 'm4',
+    name: 'British Pie',
+    expiryDate: new Date(2023, 5, 30).getFullYear(),
+  },
+
+  {
+    id: 'm5',
+    name: ' Beef Lasagne',
+    expiryDate: new Date(2024, 3, 15).getFullYear(),
+  },
+
+  {
+    id: 'm6',
+    name: 'Basmati Rice',
+    expiryDate: new Date(2025, 7, 16).getFullYear(),
   },
 ];
 
@@ -87,7 +104,7 @@ const AvailableFood = (props) => {
           />
           {foodList.length === 0 ? (
             <p className={classes.paragraph}>
-              No Food product found for the selected Year
+              No Food product found for the selected filtered Year
             </p>
           ) : (
             <ul>{foodList}</ul>
