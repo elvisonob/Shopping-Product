@@ -4,6 +4,7 @@ import classes from './AddFoodManually.module.css';
 const AddFoodManually = (props) => {
   const [enteredFoodName, setEnteredFoodName] = useState('');
   const [enteredDate, setEnteredDate] = useState('');
+  const [formIsValid, setFormIsValid] = useState(false);
 
   const addFoodHandler = (e) => {
     setEnteredFoodName(e.target.value);
@@ -13,13 +14,11 @@ const AddFoodManually = (props) => {
     setEnteredDate(e.target.value);
   };
 
-  let formIsValid = false;
-
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
-    if (!enteredFoodName.trim() !== '') {
-      formIsValid = true;
+    if (enteredFoodName.trim() !== '') {
+      setFormIsValid(true);
     } else {
       return;
     }
@@ -57,7 +56,9 @@ const AddFoodManually = (props) => {
           />
         </div>
         <div className={classes.formActions}>
-          <button className={classes.buttonPress}>Add Food Product</button>
+          <button className={classes.buttonPress} value={formIsValid}>
+            Add Food Product
+          </button>
           <button
             type="button"
             className={classes.buttonPress}
