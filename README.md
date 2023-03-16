@@ -2,7 +2,7 @@
 User Shopping Products
 
 <h1>Project Description</h1>
-This Application shows a list of predefined Food products with their use by Dates in Years, however, users can manually add a Food product of thier choice and use by dates, and thereafter, they can add it to a Shopping cart where they can view the added items and remove existing items
+This Application shows a list of predefined food products with their use by Dates in Years. Users can also manually add a Food product of their choice and use by dates, and thereafter, they can add it to a Shopping cart where they can view the added items and remove existing items
 
 I used create-react-app to execute the project.
 
