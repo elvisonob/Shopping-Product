@@ -18,8 +18,7 @@ const FoodItem = (props) => {
     <li className={classes.meal}>
       <div>
         <h3>{props.name}</h3>
-        <div className={classes.description}>{props.description}</div>
-        <div className={classes.expiryDate}>{props.expiryDate}</div>
+        <div className={classes.expiryDate}>Use by {props.expiryDate}</div>
       </div>
       <div>
         <FoodItemForm id={props.id} onAddToCart={addItemHandler} />

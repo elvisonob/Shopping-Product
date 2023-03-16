@@ -21,7 +21,7 @@ const AddedItemCart = (props) => {
           key={item.id}
           name={item.name}
           amount={item.amount}
-          expiryDate={item.expiryDate}
+          expiryDate={`Use by ${item.expiryDate}`}
           onRemove={addedItemRemoveHandler.bind(null, item.id)}
           onAdd={addedItemAddHandler.bind(null, item)}
         />
@@ -31,9 +31,13 @@ const AddedItemCart = (props) => {
 
   return (
     <Modal onClose={props.onClose}>
-      {cartItems}
+      {itemCtx.items.length === 0 ? (
+        <p className={classes.paragraph}>Added Item Cart is Empty</p>
+      ) : (
+        cartItems
+      )}
       <div className={classes.action}>
-        <button className={classes['button--alt']} onClick={props.onClose}>
+        <button className={classes.buttonPress} onClick={props.onClose}>
           Close
         </button>
       </div>

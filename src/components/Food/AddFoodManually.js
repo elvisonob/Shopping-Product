@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import classes from './AddFoodManually.module.css';
 
 const AddFoodManually = (props) => {
   const [enteredFoodName, setEnteredFoodName] = useState('');
   const [enteredDate, setEnteredDate] = useState('');
-  const [enteredNumber, setEnteredNumber] = useState(1);
 
   const addFoodHandler = (e) => {
     setEnteredFoodName(e.target.value);
@@ -13,61 +13,59 @@ const AddFoodManually = (props) => {
     setEnteredDate(e.target.value);
   };
 
-  const onAddNumberHandler = (e) => {
-    setEnteredNumber(e.target.value);
-  };
+  let formIsValid = false;
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
-    const enteredInfo = {
-      foodName: enteredFoodName,
-      date: new Date(enteredDate).toDateString(),
-    };
+    if (!enteredFoodName.trim() !== '') {
+      formIsValid = true;
+    } else {
+      return;
+    }
 
-    const enteredAmountNumber = +enteredNumber;
-
-    props.onAddFoodName(enteredFoodName, new Date(enteredDate).toDateString());
+    props.onAddFoodName(enteredFoodName, new Date(enteredDate).getFullYear());
     setEnteredFoodName('');
     setEnteredDate('');
   };
   return (
     <form onSubmit={onSubmitHandler}>
-      <div className="control-group">
-        <div className="form-control">
-          <label htmlFor="name">Food Name</label>
+      <div className={classes['control-group']}>
+        <div className={classes.labelName}>
+          <label className={classes.labelText} htmlFor="name">
+            Food Name{' '}
+          </label>
           <input
+            className={classes.input}
             type="text"
             id="name"
             onChange={addFoodHandler}
             value={enteredFoodName}
           />
         </div>
-        <div className="form-control">
-          <label htmlFor="name">Date</label>
+        <div>
+          <label className={classes.labelText} htmlFor="name">
+            Date{' '}
+          </label>
           <input
+            className={classes.input}
             type="date"
             min="2023-05-05"
             max="2025-12-31"
             value={enteredDate}
             onChange={addDateHandler}
           />
-          {/* <div>
-            <label htmlFor="number">Number</label>
-            <input
-              type="number"
-              id="number"
-              min="1"
-              max="5"
-              step="1"
-              value={enteredNumber}
-              onChange={onAddNumberHandler}
-            />
-          </div> */}
         </div>
-      </div>
-      <div className="form-actions">
-        <button>Add Food Product</button>
+        <div className={classes.formActions}>
+          <button className={classes.buttonPress}>Add Food Product</button>
+          <button
+            type="button"
+            className={classes.buttonPress}
+            onClick={props.onClose}
+          >
+            close
+          </button>
+        </div>
       </div>
     </form>
   );
